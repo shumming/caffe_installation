@@ -1,0 +1,9 @@
+## Environments
+### Ubuntu 18.04
+### Anaconda 4.3.34
+
+'''
+conda create -n caffe python=3.6
+source activate caffe
+sudo install caffe-cuda
+'''
