@@ -1,0 +1,13 @@
+*************
+Install Caffe
+*************
+
+## Environments
+### Ubuntu 18.04
+### Anaconda 4.3.34
+
+1. Download source file [[BVLC]https://github.com/BVLC/caffe]
+'''
+conda create -n caffe_py2.7 python=2.7
+source activate caffe
+'''
