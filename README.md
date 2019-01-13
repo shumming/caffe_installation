@@ -37,4 +37,25 @@ conda install -c conda-forge opencv=2.4   # install opencv 2.4
 cd @caffe_directory
 cp Makefile.config.example Makefile.config
 ```
-- Open and edit 'Makefile.config' [[site](https://github.com/BVLC/caffe/pull/1667)]
+- Open and edit 'Makefile.config'
+```
+USE_CUDNN := 1
+MATLAB_DIR := /usr/local
+WITH_PYTHON_LAYER := 1
+USE_PKG_CONFIG := 1
+
+# Comment the PYTHON-PATH
+ANACONDA_HOME := $(HOME)/anaconda
+PYTHON_INCLUDE := $(ANACONDA_HOME)/include\
+                  $(ANACONDA_HOME)/include/python2.7\
+                  $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include\
+PYTHON_LIB := $(ANACONDA_HOME)/lib
+```
+
+- Complie 
+```
+>> make clean
+>> make all
+>> make test
+>> sudo gedit ~/.bashrc
+# Add 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64" at the bottom
