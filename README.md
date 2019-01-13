@@ -9,9 +9,11 @@
 - Create a virtual enviroment and install packages.
 ```
 conda create -n caffe_py2.7 python=2.7
-source activate caffe
+source activate caffe_py2.7
+conda install -c conda-forge opencv=2.4   # install opencv 2.4
 ```
-#### package list
+##### package list
+```
 - Cython
 - numpy
 - scipy
@@ -29,4 +31,10 @@ source activate caffe
 - pyyaml
 - pillow
 - six
-*
+```
+- Move to the caffe directory and copy 'Makefile.config.example' to 'Makefile.config'
+```
+cd @caffe_directory
+cp Makefile.config.example Makefile.config
+```
+- Open and edit 'Makefile.config' [[site](https://github.com/BVLC/caffe/pull/1667)]
