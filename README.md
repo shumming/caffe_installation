@@ -18,7 +18,6 @@ cd /mathlab_directory
 - Make matlab icon on the desktop [[refer](http://ngee.tistory.com/404)]
   - Write the following format on the text editor.
 ```
-[Desktop]
 [Desktop Entry]
 Name=MATLAB2018b
 Type=Application
