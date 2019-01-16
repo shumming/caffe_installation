@@ -16,7 +16,7 @@ cd /mathlab_directory
 ```
 - Install the matlab. [[refer](https://kr.mathworks.com/help/install/ug/install-mathworks-software.html)]
 - Make matlab icon on the desktop [[refer](http://ngee.tistory.com/404)]
--- Write the following format on the text editor.
+  - Write the following format on the text editor.
 ```
 [Desktop]
 [Desktop Entry]
@@ -30,8 +30,8 @@ NoDisplay=false
 Categories=Development;IDE;
 Name[en]=MATLAB2018b
 ```
--- Save it on '/home/user/desktop'
--- Check 'Allow executing file as program' on the properties.
+  - Save it on '/home/user/desktop'
+  - Check 'Allow executing file as program' on the properties.
 
 **Installation**
 - Download source file [[BVLC](https://github.com/BVLC/caffe)]
