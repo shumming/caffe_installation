@@ -3,20 +3,35 @@
 **Environments**
 - Ubuntu 18.04
 - Anaconda 4.3.34
-- Matlab 2017a
+- Matlab 2018b
 
 **Matlab Installation**
-- Download the matlab vitual disk files '.iso'
-- Mount 'R2017a-glnxa64-dvd1.iso'.
+- Download the matlab. [[link](https://kr.mathworks.com/downloads/)]
+- Unzip the '.zip' file.
+- Type the following commands
 ```
 sudo su
-mkdir /media/mathworks
-mount R2017a-glnxa64-dvd1.iso /media/mathworks -t iso9660 -o loop
-cd /media/mathworks
-# check the mount
-ls
+cd /mathlab_directory
 ./install
 ```
+- Install the matlab. [[refer](https://kr.mathworks.com/help/install/ug/install-mathworks-software.html)]
+- Make matlab icon on the desktop [[refer](http://ngee.tistory.com/404)]
+-- Write the following format on the text editor.
+```
+[Desktop]
+[Desktop Entry]
+Name=MATLAB2018b
+Type=Application
+Exec=/matlab-directory/
+Terminal=false
+Icon=/matlab-directory/
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=MATLAB2018b
+```
+-- Save it on '/home/user/desktop'
+-- Check 'Allow executing file as program' on the properties.
 
 **Installation**
 - Download source file [[BVLC](https://github.com/BVLC/caffe)]
