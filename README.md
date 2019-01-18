@@ -87,3 +87,10 @@ PYTHON_LIB := $(ANACONDA_HOME)/lib
 >> make test
 >> sudo gedit ~/.bashrc
 # Add 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64" at the bottom
+```
+**Compile Error**
+- 'fatal error : pyconfig.h: No such file or directory'
+```
+sudo apt-get install python-dev libxml2-dev libxslt-dev
+```
+-
