@@ -31,8 +31,88 @@ Name[en]=MATLAB2018b
 ```
   - Save it on '/home/user/desktop'
   - Check 'Allow executing file as program' on the properties.
+  
+**Opencv Installation**
+[[reference](https://webnautes.tistory.com/1030)]
+- Check opencv installtation and remove previous opencv version
+```
+$ pkg-config --modversion opencv
 
-**Installation**
+# If there is opencv, remove it
+$ sudo apt-get purge libopencv* python-opencv
+$sudo apt-get autoremove
+```
+- Upgrade packages
+```
+$ sudo apt-get update
+$ sudo apt-get upgrade
+```
+- Install packages that need to compile OpenCV
+```
+$ sudo apt-get install build-essential cmake
+$ sudo apt-get install pkg-config
+$ sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+$ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libxvidcore-dev libx264-dev libxine2-dev
+$ sudo apt-get install libv4l-dev v4l-utils
+$ sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+$ sudo apt-get install libqt4-dev
+$ sudo apt-get install mesa-utils libgl1-mesa-dri libqt4-opengl-dev
+$ sudo apt-get install libatlas-base-dev gfortran libeigen3-dev
+$ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
+```
+
+  - If you have "E: Unable to locate package libjasper-dev" or "E: Package 'libpng12-dev' has no installation candidate"         errors, try following commands.
+```
+ sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+```
+- Download OpenCV-3.4.1 and OpenCV-contrib-3.4.1. [[opencv](https://opencv.org/opencv-3-4-1.html)][[opencv-contrib](https://github.com/opencv/opencv_contrib/releases?after=3.4.1)]
+- Upzip those two files under the 'opencv' folder.
+```
+(dir.)/opencv$ ls -d */
+opencv-3.4.1/ opencv_contrib-3.4.1/
+```
+- Move to the opencv-3.4.1 directory and make 'build' directory. We're going to compile opencv file in the build directory.
+```
+(dir.)/opencv$ cd opencv-3.4.1/
+(dir.)/opencv/opencv-3.4.1$ mkdir build
+(dir.)/opencv/opencv-3.4.1$ cd build
+(dir.)/opencv/opencv-3.4.1/build$
+```
+- Compile OpenCV with cmake.
+```
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_TBB=OFF \
+-D WITH_IPP=OFF \
+-D WITH_1394=OFF \
+-D BUILD_WITH_DEBUG_INFO=OFF \
+-D BUILD_DOCS=OFF \
+-D INSTALL_C_EXAMPLES=ON \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_TESTS=OFF \
+-D BUILD_PERF_TESTS=OFF \
+-D WITH_QT=ON \
+-D WITH_GTK=OFF \
+-D WITH_OPENGL=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.1/modules \
+-D WITH_V4L=ON  \
+-D WITH_FFMPEG=ON \
+-D WITH_XINE=ON \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D OPENCV_GENERATE_PKGCONFIG=ON ../
+```
+- Check the numbder of CPU process cores before compile.
+```
+$ cat /proc/cpuinfo | grep processor | wc -l
+16
+```
+- Compile with make commands.
+```
+(dir.)/opencv/opencv-3.4.1/build$ make -j16
+```
+
+**Caffe installation**
 - Download source file [[BVLC](https://github.com/BVLC/caffe)]
 - Create a virtual enviroment and install packages.
 ```
