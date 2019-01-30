@@ -73,6 +73,20 @@ $ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
 (dir.)/opencv$ ls -d */
 opencv-3.4.1/ opencv_contrib-3.4.1/
 ```
+## Check g++ and gcc versions are under 5.0
+```
+# Check the version
+gcc --version
+g++ --version
+# Install 4.8 version
+sudo apt-get install gcc-4.8
+sudo apt-get install g++-4.8
+# Create new symbolic link
+sudo rm /usr/bin/gcc
+sudo rm /usr/bin/g++
+sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
+sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
+```
 ## Move to the opencv-3.4.1 directory and make 'build' directory. We're going to compile opencv file in the build directory.
 ```
 (dir.)/opencv$ cd opencv-3.4.1/
