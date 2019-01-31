@@ -5,7 +5,7 @@
 - Anaconda 4.3.34
 - Matlab 2018b
 
-**Matlab Installation**
+# Matlab Installation
 - Download the matlab. [[link](https://kr.mathworks.com/downloads/)]
 - Unzip the '.zip' file.
 - Type the following commands
@@ -36,7 +36,7 @@ Name[en]=MATLAB2018b
 
 # Opencv Installation
 ### [[reference](https://webnautes.tistory.com/1030)]
-## Check opencv installtation and remove previous opencv version
+### Check opencv installtation and remove previous opencv version
 ```
 $ pkg-config --modversion opencv
 
@@ -44,12 +44,12 @@ $ pkg-config --modversion opencv
 $ sudo apt-get purge libopencv* python-opencv
 $sudo apt-get autoremove
 ```
-## Upgrade packages
+### Upgrade packages
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
-## Install packages that need to compile OpenCV
+### Install packages that need to compile OpenCV
 ```
 $ sudo apt-get install build-essential cmake
 $ sudo apt-get install pkg-config
@@ -67,13 +67,13 @@ $ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
 ```
  sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
 ```
-## Download OpenCV-3.4.1 and OpenCV-contrib-3.4.1. [[opencv](https://opencv.org/opencv-3-4-1.html)][[opencv-contrib](https://github.com/opencv/opencv_contrib/releases?after=3.4.1)]
-## Upzip those two files under the 'opencv' folder.
+### Download OpenCV-3.4.1 and OpenCV-contrib-3.4.1. [[opencv](https://opencv.org/opencv-3-4-1.html)][[opencv-contrib](https://github.com/opencv/opencv_contrib/releases?after=3.4.1)]
+### Upzip those two files under the 'opencv' folder.
 ```
 (dir.)/opencv$ ls -d */
 opencv-3.4.1/ opencv_contrib-3.4.1/
 ```
-## Check g++ and gcc versions are under 5.0
+### Check g++ and gcc versions are under 5.0
 ```
 # Check the version
 gcc --version
@@ -87,14 +87,14 @@ sudo rm /usr/bin/g++
 sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
 sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
 ```
-## Move to the opencv-3.4.1 directory and make 'build' directory. We're going to compile opencv file in the build directory.
+### Move to the opencv-3.4.1 directory and make 'build' directory. We're going to compile opencv file in the build directory.
 ```
 (dir.)/opencv$ cd opencv-3.4.1/
 (dir.)/opencv/opencv-3.4.1$ mkdir build
 (dir.)/opencv/opencv-3.4.1$ cd build
 (dir.)/opencv/opencv-3.4.1/build$
 ```
-## Compile OpenCV with cmake.
+### Compile OpenCV with cmake.
 ```
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -126,25 +126,25 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D PYTHON3_PACKAGES_PATH=/usr/lib/python3/dist-packages \
 -D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so\
 ```
-- Check the numbder of CPU process cores before compile.
+### Check the numbder of CPU process cores before compile.
 ```
 $ cat /proc/cpuinfo | grep processor | wc -l
 16
 ```
-- Compile with make commands.
+### Compile with make commands.
 ```
 (dir.)/opencv/opencv-3.4.1/build$ make -j16
 ```
 
-**Caffe installation**
-- Download source file [[BVLC](https://github.com/BVLC/caffe)]
-- Create a virtual enviroment and install packages.
+# Caffe installation
+### Download source file [[BVLC](https://github.com/BVLC/caffe)]
+### Create a virtual enviroment and install packages.
 ```
 conda create -n caffe_py2.7 python=2.7
 source activate caffe_py2.7
 conda install -c conda-forge opencv=2.4   # install opencv 2.4
 ```
-##### package list
+#### package list
 ```
 - Cython
 - numpy
@@ -164,12 +164,12 @@ conda install -c conda-forge opencv=2.4   # install opencv 2.4
 - pillow
 - six
 ```
-- Move to the caffe directory and copy 'Makefile.config.example' to 'Makefile.config'
+### Move to the caffe directory and copy 'Makefile.config.example' to 'Makefile.config'
 ```
 cd @caffe_directory
 cp Makefile.config.example Makefile.config
 ```
-- Open and edit 'Makefile.config'
+### Open and edit 'Makefile.config'
 ```
 USE_CUDNN := 1
 MATLAB_DIR := /usr/local
@@ -184,7 +184,7 @@ PYTHON_INCLUDE := $(ANACONDA_HOME)/include\
 PYTHON_LIB := $(ANACONDA_HOME)/lib
 ```
 
-- Complie 
+### Complie 
 ```
 >> make clean
 >> make all
