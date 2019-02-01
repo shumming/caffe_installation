@@ -101,6 +101,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D WITH_TBB=OFF \
 -D WITH_IPP=OFF \
 -D WITH_1394=OFF \
+-D BUILD_TIFF=ON \
 -D BUILD_WITH_DEBUG_INFO=OFF \
 -D BUILD_DOCS=OFF \
 -D INSTALL_C_EXAMPLES=ON \
@@ -189,8 +190,8 @@ PYTHON_LIB := $(ANACONDA_HOME)/lib
 $ cd (caffe directory)
 $ mkdir build
 $ cd build/
+$ export OpenCV_DIR="/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build"
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
 -D Protobuf_INCLUDE_DIR=/home/sumin/anaconda3/envs/caffe_py27/include \
@@ -201,6 +202,8 @@ $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D Protobuf_PROTOC_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so\
 -D Protobuf_PROTOC_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so ../
 $ make -j16
+-D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
+
 ```
 
 **Compile Error**
@@ -208,4 +211,6 @@ $ make -j16
 ```
 export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_py27/include/python2.7"
 ```
--
+- leveldb error [[link](https://gist.github.com/dustismo/6203329)]
+
+- Video error [[link](https://github.com/facebook/C3D/issues/253)]
