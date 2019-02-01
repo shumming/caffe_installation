@@ -157,7 +157,7 @@ conda install -c conda-forge opencv=2.4   # install opencv 2.4
 - networkx
 - nose
 - pandas
-- python-dateuil
+- python-datet-util
 - protobuf
 - python-gflags
 - pyyaml
@@ -172,7 +172,7 @@ cp Makefile.config.example Makefile.config
 ### Open and edit 'Makefile.config'
 ```
 USE_CUDNN := 1
-MATLAB_DIR := /usr/local
+MATLAB_DIR := /usr/local/MATLAB/R2018b
 WITH_PYTHON_LAYER := 1
 USE_PKG_CONFIG := 1
 
@@ -186,15 +186,26 @@ PYTHON_LIB := $(ANACONDA_HOME)/lib
 
 ### Complie 
 ```
->> make clean
->> make all
->> make test
->> sudo gedit ~/.bashrc
-# Add 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64" at the bottom
+$ cd (caffe directory)
+$ mkdir build
+$ cd build/
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
+-D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D Protobuf_INCLUDE_DIR=/home/sumin/anaconda3/envs/caffe_py27/include \
+-D Protobuf_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf.so \
+-D Protobuf_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf.so\
+-D Protobuf_LITE_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf-lite.so \
+-D Protobuf_LITE_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf-lite.so \
+-D Protobuf_PROTOC_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so\
+-D Protobuf_PROTOC_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so ../
+$ make -j16
 ```
+
 **Compile Error**
 - 'fatal error : pyconfig.h: No such file or directory'
 ```
-sudo apt-get install python-dev libxml2-dev libxslt-dev
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_py27/include/python2.7"
 ```
 -
