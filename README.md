@@ -42,7 +42,7 @@ $ pkg-config --modversion opencv
 
 # If there is opencv, remove it
 $ sudo apt-get purge libopencv* python-opencv
-$sudo apt-get autoremove
+$ sudo apt-get autoremove
 ```
 ### Upgrade packages
 ```
@@ -137,15 +137,11 @@ $ cat /proc/cpuinfo | grep processor | wc -l
 (dir.)/opencv/opencv-3.4.1/build$ make -j16
 ```
 
-# Caffe installation
-### Download source file [[BVLC](https://github.com/BVLC/caffe)]
-### Create a virtual enviroment and install packages.
-```
-conda create -n caffe_py2.7 python=2.7
-source activate caffe_py2.7
-conda install -c conda-forge opencv=2.4   # install opencv 2.4
-```
-#### package list
+# Segmentation-CNN
+### Download source file [[link](https://github.com/zhengshou/scnn)]
+
+## Compilation of 'C3D-v1.1/C3D-overlaploss'
+### Install the following packages with ```sudo apt-get install [pakage_name]```.
 ```
 - Cython
 - numpy
@@ -154,17 +150,82 @@ conda install -c conda-forge opencv=2.4   # install opencv 2.4
 - matplotlib
 - ipython
 - h5py
-- leveldb
 - networkx
 - nose
 - pandas
 - python-datet-util
-- protobuf
 - python-gflags
 - pyyaml
 - pillow
 - six
 ```
+### Install 'leveldb', 'protobuf', 'gflags', and 'glogs' from source.
+- leveldb [[ref](https://gist.github.com/dustismo/6203329)]
+```
+$ sudo apt-get install libsnappy-dev
+
+$ wget https://leveldb.googlecode.com/files/leveldb-1.9.0.tar.gz
+$ tar -xzf leveldb-1.9.0.tar.gz
+$ cd leveldb-1.9.0
+$ make
+$ sudo mv libleveldb.* /usr/local/lib
+$ cd include
+$ sudo cp -R leveldb /usr/local/include
+$ sudo ldconfig
+```
+- protobuf-3.6.1. [[download](https://github.com/protocolbuffers/protobuf/releases/latest
+)] [[ref](https://github.com/protocolbuffers/protobuf/blob/master/src/README.md)]
+  - Download the source code.
+  ```
+  git clone https://github.com/protocolbuffers/protobuf/releases/latest
+  cd protobuf
+  ```
+  - Make sure you have also cloned the submodules and generated the configure script.
+  ```
+  $ $ git submodule update --init --recursive
+  $ ./autogen.sh
+  ```
+  - Build and install the protocol buffer compiler
+  ```
+  $ ./configure
+  $ make
+  $ make check    #optional
+  $ sudo make install
+  $ sudo ldconfig
+  ```
+  
+- gflags [[ref](https://github.com/google/glog/wiki/Installing-Glog-on-Ubuntu-14.04)]
+  - Download gflags and remove the old gflags installations
+  ```
+  $ git clone https://github.com/gflags/gflags
+  $ mkdir build
+  $ cd build
+  $ sudo apt-get purge libgflags-dev
+  ```
+  - Compile and install the protobuf-alpha
+  
+  ```
+  $ cmake -DGFLAGS_NAMESPACE=gflags -DCMAKE_CXX_FLAGS=-fPIC ..
+  $ make
+  $ sudo make install
+  $ sudo ldconfig
+  ```
+  
+- glogs [[ref](https://github.com/google/glog/wiki/Installing-Glog-on-Ubuntu-14.04)]
+  - Get the source code and move to the directory.
+  ```
+  git clone https://github.com/google/glog
+  cd glog
+  ```
+  - Compile the glogs.
+  ```
+  $ ./autogen.sh
+  $ ./configure
+  $ make -j16
+  $ sudo make install
+  $ sudo ldconfig
+  ```
+  
 ### Move to the caffe directory and copy 'Makefile.config.example' to 'Makefile.config'
 ```
 cd @caffe_directory
@@ -172,17 +233,9 @@ cp Makefile.config.example Makefile.config
 ```
 ### Open and edit 'Makefile.config'
 ```
+# uncomment following lines
 USE_CUDNN := 1
-MATLAB_DIR := /usr/local/MATLAB/R2018b
 WITH_PYTHON_LAYER := 1
-USE_PKG_CONFIG := 1
-
-# Comment the PYTHON-PATH
-ANACONDA_HOME := $(HOME)/anaconda
-PYTHON_INCLUDE := $(ANACONDA_HOME)/include\
-                  $(ANACONDA_HOME)/include/python2.7\
-                  $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include\
-PYTHON_LIB := $(ANACONDA_HOME)/lib
 ```
 
 ### Complie 
@@ -190,20 +243,11 @@ PYTHON_LIB := $(ANACONDA_HOME)/lib
 $ cd (caffe directory)
 $ mkdir build
 $ cd build/
-$ export OpenCV_DIR="/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build"
+$ export OpenCV_DIR="(opencv build directory)"
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
--D Protobuf_INCLUDE_DIR=/home/sumin/anaconda3/envs/caffe_py27/include \
--D Protobuf_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf.so \
--D Protobuf_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf.so\
--D Protobuf_LITE_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf-lite.so \
--D Protobuf_LITE_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotobuf-lite.so \
--D Protobuf_PROTOC_LIBRARY_DEBUG=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so\
--D Protobuf_PROTOC_LIBRARY_RELEASE=/home/sumin/anaconda3/envs/caffe_py27/lib/libprotoc.so ../
 $ make -j16
--D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
-
 ```
 
 **Compile Error**
@@ -211,6 +255,4 @@ $ make -j16
 ```
 export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_py27/include/python2.7"
 ```
-- leveldb error [[link](https://gist.github.com/dustismo/6203329)]
-
 - Video error [[link](https://github.com/facebook/C3D/issues/253)]
