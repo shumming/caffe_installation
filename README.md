@@ -136,6 +136,7 @@ $ cat /proc/cpuinfo | grep processor | wc -l
 ```
 (dir.)/opencv/opencv-3.4.1/build$ make -j16
 ```
+---
 
 # Segmentation-CNN
 ### Download source file [[link](https://github.com/zhengshou/scnn)]
@@ -256,3 +257,7 @@ $ make -j16
 export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_py27/include/python2.7"
 ```
 - Video error [[link](https://github.com/facebook/C3D/issues/253)]
+
+---
+
+## Compilation of 'C3D-v1.1/C3D_sample_rate'
