@@ -3,7 +3,8 @@
 **Environments**
 - Ubuntu 18.04
 - Anaconda 4.3.34
-- Matlab 2018b
+- cuda 9.0 
+- cudnn 7.0
 
 # Matlab Installation
 - Download the matlab. [[link](https://kr.mathworks.com/downloads/)]
@@ -104,6 +105,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D BUILD_TIFF=ON \
 -D BUILD_WITH_DEBUG_INFO=OFF \
 -D BUILD_DOCS=OFF \
+-D ENABLE_PRECOMPILED_HEADERS=OFF \
 -D INSTALL_C_EXAMPLES=ON \
 -D INSTALL_PYTHON_EXAMPLES=ON \
 -D BUILD_EXAMPLES=OFF \
@@ -246,12 +248,17 @@ $ mkdir build
 $ cd build/
 $ export OpenCV_DIR="(opencv build directory)"
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
--D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-9.0/include \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 ..\
 $ make -j16
 ```
 
 **Compile Error**
+- 'This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options.'
+  -- Put the following line in CMakeLists.txt
+  ```
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  ```
 - 'fatal error : pyconfig.h: No such file or directory'
 ```
 export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_py27/include/python2.7"
