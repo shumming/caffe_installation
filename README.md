@@ -3,7 +3,7 @@
 **Environments**
 - Ubuntu 18.04
 - Anaconda 4.3.34
-- cuda 9.0 
+- cuda 8.0 
 - cudnn 7.0
 
 # Matlab Installation
@@ -246,10 +246,10 @@ WITH_PYTHON_LAYER := 1
 $ cd (caffe directory)
 $ mkdir build
 $ cd build/
-$ export OpenCV_DIR="(opencv build directory)"
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-9.0/include \
--D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 ..\
+-D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build .. \
 $ make -j16
 ```
 
