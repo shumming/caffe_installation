@@ -226,7 +226,7 @@ $ sudo ldconfig
   $ sudo make install
   $ sudo ldconfig
   ```
-  
+### Update the 'caffe/include/caffe/util/cudnn.hpp' [[ref](https://github.com/BVLC/caffe/blob/master/include/caffe/util/cudnn.hpp)]
 ### Move to the caffe directory and copy 'Makefile.config.example' to 'Makefile.config'
 ```
 cd @caffe_directory
@@ -261,3 +261,16 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_
 
 
 ## Compilation of 'C3D-v1.1/C3D_sample_rate'
+### cuda 9.0, g++-6 -> make -j16 all
+### I got error
+```
+In file included from ./include/caffe/util/device_alternate.hpp:40:0,
+                 from ./include/caffe/common.hpp:19,
+                 from ./include/caffe/blob.hpp:8,
+                 from src/caffe/blob.cpp:4:
+./include/caffe/util/cudnn.hpp: In function ‘const char* cudnnGetErrorString(cudnnStatus_t)’:
+./include/caffe/util/cudnn.hpp:21:10: warning: enumeration value ‘CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING’ not handled in switch [-Wswitch]
+   switch (status) {
+          ^
+```
+
