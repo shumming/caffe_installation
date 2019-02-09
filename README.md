@@ -297,12 +297,22 @@ $ cd build
 ```
 ### Update the 'caffe/include/caffe/util/cudnn.hpp' [[ref](https://github.com/BVLC/caffe/blob/master/include/caffe/util/cudnn.hpp)]
 
-## Compile files
+## Compile files and install.
 ```
 $ cmake .. -DUSE_MPI=ON \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
 -D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build .. \
+$ make install
+```
+- If you have H5LT error, edit 'caffe/cmake/Dependencies.cmake'. [[ref](https://devtalk.nvidia.com/default/topic/1037599/jetson-tx2/installation-of-caffe-error/)]
+```
+---  list(APPEND Caffe_LINKER_LIBS ${HDF5_LIBRARIES})
++++  list(APPEND Caffe_LINKER_LIBS ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
+```
+##
+```
+mpirun -np 4 ./install/bin/caffe train --solver=<Your Solver File> [--weights=<Pretrained caffemodel>]
 ```
 
 
