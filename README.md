@@ -2,9 +2,9 @@
 
 **Overview**
 - [Matlab](#matlab-installation)
-- [OpenCV](#opencv-installation
+- [OpenCV](#opencv-installation)
 - [Segmentation-CNN](#segmentation-cnn)
-
+- [Untrimmed-Net](#untrimmed-net)
 **Environments**
 - Ubuntu 18.04
 - Anaconda 4.3.34
@@ -270,19 +270,15 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_
 ```
 - Video error [[link](https://github.com/facebook/C3D/issues/253)]
 
+---
 
+# Untrimmed-Net 
+## Donwload the files [[link1](https://github.com/wanglimin/UntrimmedNet)] [[link2](https://github.com/yjxiong/caffe/tree/untrimmednet)]
+## 
+```
+$ cmake .. -DUSE_MPI=ON \
+-D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build .. \
 
-## Compilation of 'C3D-v1.1/C3D_sample_rate'
-### cuda 9.0, g++-6 -> make -j16 all
-### I got error
-```
-In file included from ./include/caffe/util/device_alternate.hpp:40:0,
-                 from ./include/caffe/common.hpp:19,
-                 from ./include/caffe/blob.hpp:8,
-                 from src/caffe/blob.cpp:4:
-./include/caffe/util/cudnn.hpp: In function ‘const char* cudnnGetErrorString(cudnnStatus_t)’:
-./include/caffe/util/cudnn.hpp:21:10: warning: enumeration value ‘CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING’ not handled in switch [-Wswitch]
-   switch (status) {
-          ^
-```
 
