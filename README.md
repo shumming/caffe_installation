@@ -274,11 +274,34 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_
 
 # Untrimmed-Net 
 ## Donwload the files [[link1](https://github.com/wanglimin/UntrimmedNet)] [[link2](https://github.com/yjxiong/caffe/tree/untrimmednet)]
-## 
+## Edit the 'Makefile.config'.
+- Uncomment 'Use_CUDNN:=1', 'OPENCV_VERSION:=3', and "WITH_PYTHON_LAYER:=1'.
+- If you use Anaconda, set the environment directory to 'ANACONDA_HOME'.
+- Check the g++ version.
+```
+#Check the g++ version
+$ g++ --version
+#If your g++ is lower than 5.5, install it.
+$ sudo apt-get install g++-5
+```
+- Uncomment and edit the following line in the 'Makefile.config'.
+```
+CUSTOM_CXX := g++-5
+```
+
+## Make a 'build' directory.
+```
+$ mkdir build
+$ cd build
+```
+### Update the 'caffe/include/caffe/util/cudnn.hpp' [[ref](https://github.com/BVLC/caffe/blob/master/include/caffe/util/cudnn.hpp)]
+
+## Compile files
 ```
 $ cmake .. -DUSE_MPI=ON \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
 -D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build .. \
+```
 
 
