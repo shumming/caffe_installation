@@ -328,6 +328,7 @@ $ cd build
 ```
 $ cmake .. -DUSE_MPI=ON \
 -D BUILD_matlab=ON \
+-D BUILD_python=OFF \
 -D Matlab_DIR=/usr/local/MATLAB/R2017b \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-9.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
