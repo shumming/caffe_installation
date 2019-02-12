@@ -276,55 +276,59 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_
 # Untrimmed-Net 
 ## Donwload the files [[link1](https://github.com/wanglimin/UntrimmedNet)] [[link2](https://github.com/yjxiong/caffe/tree/untrimmednet)]
 
-## Need gcc-6.3.x for Matlab2018b.
-- Matlab 2018b
-- gcc-6.3
+## Need gcc-4.9 for Matlab 2017b. You can check the right version of gcc for your matlab version. [[ref](https://kr.mathworks.com/support/requirements/previous-releases.html)]
+- Matlab 2017b
+- gcc-4.9.3
 - cuda 9.0
 - cudnn 7.0
 
-## Install gcc-6.3 from scratch. [[ref1](https://unix.stackexchange.com/questions/410723/how-to-install-a-specific-version-of-gcc-in-kali-linux)] [[ref2](https://gcc.gnu.org/wiki/InstallingGCC)]
+## Install gcc-4.9 [[ref](https://stackoverflow.com/questions/48398475/fail-to-install-gcc-4-9-in-ubuntu17-04)]
 ```
-wget https://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
-tar xzf gcc-6.3.0.tar.gz
-cd gcc-6.3.0
-./contrib/download_prerequisites
-cd ..
-mkdir objdir
-cd objdir
-$PWD/../gcc-6.3.0/configure --prefix=/usr/bin/gcc-6.3 --enable-languages=c,c++,fortran,go --disable-multilib
-make
-make install
+mkdir ~/Downloads/gcc-4.9-deb && cd ~/Downloads/gcc-4.9-deb
+
+wget http://launchpadlibrarian.net/247707088/libmpfr4_3.1.4-1_amd64.deb
+wget http://launchpadlibrarian.net/253728424/libasan1_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728426/libgcc-4.9-dev_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728314/gcc-4.9-base_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728399/cpp-4.9_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728404/gcc-4.9_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728432/libstdc++-4.9-dev_4.9.3-13ubuntu2_amd64.deb
+wget http://launchpadlibrarian.net/253728401/g++-4.9_4.9.3-13ubuntu2_amd64.deb
+
+sudo dpkg -i gcc-4.9-base_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i libmpfr4_3.1.4-1_amd64.deb
+sudo dpkg -i libasan1_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i libgcc-4.9-dev_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i cpp-4.9_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i gcc-4.9_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i libstdc++-4.9-dev_4.9.3-13ubuntu2_amd64.deb
+sudo dpkg -i g++-4.9_4.9.3-13ubuntu2_amd64.deb
 ```
 
-
-## Edit the 'Makefile.config'.
-- Uncomment 'Use_CUDNN:=1', 'OPENCV_VERSION:=3', and "WITH_PYTHON_LAYER:=1'.
-- If you use Anaconda, set the environment directory to 'ANACONDA_HOME'.
-- Check the g++ version.
+## Check gcc-4.9 and g++-4.9 in '/usr/bin' and make symbolic link.
 ```
-#Check the g++ version
+$ cd /usr/bin
+$ sudo rm gcc g++
+$ sudo ln -s gcc-4.9 gcc
+$ sudo ln -s g++-4.9 g++
+# version check
+$ gcc --version
 $ g++ --version
-#If your g++ is lower than 5.5, install it.
-$ sudo apt-get install g++-5
 ```
-- Uncomment and edit the following line in the 'Makefile.config'.
-```
-CUSTOM_CXX := g
 
-```
+### Update the 'caffe/include/caffe/util/cudnn.hpp' [[ref](https://github.com/BVLC/caffe/blob/master/include/caffe/util/cudnn.hpp)]
 
 ## Make a 'build' directory.
 ```
 $ mkdir build
 $ cd build
 ```
-### Update the 'caffe/include/caffe/util/cudnn.hpp' [[ref](https://github.com/BVLC/caffe/blob/master/include/caffe/util/cudnn.hpp)]
 
 ## Compile files and install.
 ```
 $ cmake .. -DUSE_MPI=ON \
 -D BUILD_matlab=ON \
--D Matlab_DIR=/usr/local/MATLAB/R2018b \
+-D Matlab_DIR=/usr/local/MATLAB/R2017b \
 -D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-9.0/include \
 -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
 -D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
