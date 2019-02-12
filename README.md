@@ -342,7 +342,10 @@ $ make install
 ```
 ##
 ```
-mpirun -np 1 ./install/bin/caffe test --gpu=0 --solver="../../UntrimmedNet-master/models/solver.prototxt" --model="../../UntrimmedNet-master/models/model.prototxt" --weights="../../UntrimmedNet-master/models/weights.caffemodel"
+mpirun -np 1 ./install/bin/caffe test --gpu=0 \
+--solver="../../UntrimmedNet-master/models/solver.prototxt" \
+--model="../../UntrimmedNet-master/models/model.prototxt" \
+--weights="../../UntrimmedNet-master/models/weights.caffemodel" ..\
 ```
 
 
