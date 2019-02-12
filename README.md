@@ -124,7 +124,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D WITH_V4L=ON  \
 -D WITH_FFMPEG=ON \
 -D WITH_XINE=ON \
--D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
 -D BUILD_NEW_PYTHON_SUPPORT=ON \
 -D PYTHON2_INCLUDE_DIR=/usr/include/python2.7 \
 -D PYTHON2_NUMPY_INCLUDE_DIRS=/usr/lib/python2.7/dist-packages/numpy/core/include/ \
@@ -275,6 +275,28 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/home/sumin/anaconda3/envs/caffe_
 
 # Untrimmed-Net 
 ## Donwload the files [[link1](https://github.com/wanglimin/UntrimmedNet)] [[link2](https://github.com/yjxiong/caffe/tree/untrimmednet)]
+
+## Need gcc-6.3.x for Matlab2018b.
+- Matlab 2018b
+- gcc-6.3
+- cuda 9.0
+- cudnn 7.0
+
+## Install gcc-6.3 from scratch. [[ref1](https://unix.stackexchange.com/questions/410723/how-to-install-a-specific-version-of-gcc-in-kali-linux)] [[ref2](https://gcc.gnu.org/wiki/InstallingGCC)]
+```
+wget https://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
+tar xzf gcc-6.3.0.tar.gz
+cd gcc-6.3.0
+./contrib/download_prerequisites
+cd ..
+mkdir objdir
+cd objdir
+$PWD/../gcc-6.3.0/configure --prefix=/usr/bin/gcc-6.3 --enable-languages=c,c++,fortran,go --disable-multilib
+make
+make install
+```
+
+
 ## Edit the 'Makefile.config'.
 - Uncomment 'Use_CUDNN:=1', 'OPENCV_VERSION:=3', and "WITH_PYTHON_LAYER:=1'.
 - If you use Anaconda, set the environment directory to 'ANACONDA_HOME'.
@@ -287,7 +309,8 @@ $ sudo apt-get install g++-5
 ```
 - Uncomment and edit the following line in the 'Makefile.config'.
 ```
-CUSTOM_CXX := g++-5
+CUSTOM_CXX := g
+
 ```
 
 ## Make a 'build' directory.
@@ -302,8 +325,8 @@ $ cd build
 $ cmake .. -DUSE_MPI=ON \
 -D BUILD_matlab=ON \
 -D Matlab_DIR=/usr/local/MATLAB/R2018b \
--D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-8.0/include \
--D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+-D CUDA_TOOLKIT_INCLUDE=/usr/local/cuda-9.0/include \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
 -D OpenCV_DIR=/media/sumin/2E06B41C06B3E34F/opencv/opencv-3.4.1/build \
 $ make install
 ```
